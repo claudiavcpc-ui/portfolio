@@ -5,192 +5,602 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>VCP_ARCHIVE — Portfolio</title>
+  <title>VCP_ARCHIVE — Visual Designer</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- CURSOR -->
-  <div class="cursor"></div>
+  <!-- =========================
+       CUSTOM CURSOR
+  ========================== -->
 
-  <!-- EDITOR -->
-
-  <div class="editor">
-
-    <div class="editor-header">
-      <div>
-        VCP_ARCHIVE
-      </div>
-
-      <div>
-        SCENE EDITOR / 001
-      </div>
-    </div>
-
-
-    <div class="editor-toolbar">
-
-      <label class="upload-button">
-        + SUBIR FONDO
-        <input
-          type="file"
-          id="backgroundUpload"
-          accept="image/*"
-          hidden
-        >
-      </label>
-
-      <button id="clearBackground">
-        LIMPIAR
-      </button>
-
-      <button id="toggleEditor">
-        OCULTAR EDITOR
-      </button>
-
-    </div>
-
-
-    <!-- ESCENA -->
-
-    <main
-      id="scene"
-      class="scene"
-    >
-
-      <div
-        id="emptyScene"
-        class="empty-scene"
-      >
-        <span>NO BACKGROUND</span>
-        <small>UPLOAD IMAGE TO BEGIN</small>
-      </div>
-
-      <img
-        id="backgroundImage"
-        class="background-image"
-        alt=""
-      >
-
-    </main>
-
+  <div class="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-text">MOVE</div>
   </div>
 
 
-  <!-- CURSOR LABEL -->
+  <!-- =========================
+       PORTFOLIO
+  ========================== -->
+
+  <main class="portfolio">
+
+
+    <!-- =========================
+         SCENE
+    ========================== -->
+
+    <section class="scene" id="scene">
+
+      <!-- BACKGROUND -->
+
+      <div class="scene-background">
+
+        <img
+          src="assets/background/fondo.jpg"
+          alt=""
+          id="background"
+        >
+
+      </div>
+
+
+      <!-- =========================
+           OBJECTS
+      ========================== -->
+
+      <div class="objects">
+
+
+        <!-- USB -->
+
+        <button
+          class="scene-object object-usb"
+          data-folder="usb"
+          aria-label="USB"
+        >
+
+          <img
+            src="assets/objects/usb.png"
+            alt=""
+          >
+
+        </button>
+
+
+        <!-- DISCO -->
+
+        <button
+          class="scene-object object-disco"
+          data-folder="disco"
+          aria-label="Disco"
+        >
+
+          <img
+            src="assets/objects/disco.png"
+            alt=""
+          >
+
+        </button>
+
+
+        <!-- CELULAR -->
+
+        <button
+          class="scene-object object-phone"
+          data-folder="celular"
+          aria-label="Celular"
+        >
+
+          <img
+            src="assets/objects/celular.png"
+            alt=""
+          >
+
+        </button>
+
+
+        <!-- OBJETO 04 -->
+
+        <button
+          class="scene-object object-four"
+          data-folder="objeto-04"
+          aria-label="Objeto 04"
+        >
+
+          <img
+            src="assets/objects/objeto-04.png"
+            alt=""
+          >
+
+        </button>
+
+
+      </div>
+
+
+      <!-- =========================
+           UI
+      ========================== -->
+
+      <div class="scene-ui">
+
+        <div class="archive-name">
+          VCP_ARCHIVE
+        </div>
+
+        <div class="archive-info">
+          VISUAL DESIGNER / 2026
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       PROJECT VIEWER
+  ========================== -->
 
   <div
-    id="cursorLabel"
-    class="cursor-label"
+    class="viewer"
+    id="viewer"
+    aria-hidden="true"
   >
-    MOVE
+
+    <div class="viewer-background"></div>
+
+
+    <header class="viewer-header">
+
+      <div id="viewerFolder">
+        PROJECT
+      </div>
+
+      <button
+        class="viewer-close"
+        id="viewerClose"
+      >
+        CLOSE ×
+      </button>
+
+    </header>
+
+
+    <div class="viewer-content">
+
+      <button
+        class="viewer-arrow viewer-prev"
+        id="viewerPrev"
+      >
+        ←
+      </button>
+
+
+      <div
+        class="viewer-track"
+        id="viewerTrack"
+      >
+      </div>
+
+
+      <button
+        class="viewer-arrow viewer-next"
+        id="viewerNext"
+      >
+        →
+      </button>
+
+    </div>
+
+
+    <div
+      class="viewer-counter"
+      id="viewerCounter"
+    >
+      01 / 01
+    </div>
+
   </div>
 
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
   <script>
 
     /* =========================
        CURSOR
-    ========================= */
+    ========================== */
 
-    const cursor = document.querySelector(".cursor");
-    const cursorLabel = document.querySelector("#cursorLabel");
+    const cursor =
+      document.querySelector(".cursor");
 
-    document.addEventListener("mousemove", (event) => {
-
-      cursor.style.left = event.clientX + "px";
-      cursor.style.top = event.clientY + "px";
-
-      cursorLabel.style.left = event.clientX + "px";
-      cursorLabel.style.top = event.clientY + "px";
-
-    });
+    const cursorText =
+      document.querySelector(".cursor-text");
 
 
-    /* =========================
-       BACKGROUND
-    ========================= */
+    document.addEventListener(
+      "mousemove",
+      (event) => {
 
-    const backgroundUpload =
-      document.querySelector("#backgroundUpload");
+        cursor.style.left =
+          event.clientX + "px";
 
-    const backgroundImage =
-      document.querySelector("#backgroundImage");
-
-    const emptyScene =
-      document.querySelector("#emptyScene");
-
-    backgroundUpload.addEventListener("change", (event) => {
-
-      const file =
-        event.target.files[0];
-
-      if (!file) return;
-
-      const imageURL =
-        URL.createObjectURL(file);
-
-      backgroundImage.src =
-        imageURL;
-
-      backgroundImage.classList.add("visible");
-
-      emptyScene.classList.add("hidden");
-
-    });
-
-
-    /* =========================
-       CLEAR
-    ========================= */
-
-    const clearBackground =
-      document.querySelector("#clearBackground");
-
-    clearBackground.addEventListener("click", () => {
-
-      backgroundImage.src = "";
-
-      backgroundImage.classList.remove("visible");
-
-      emptyScene.classList.remove("hidden");
-
-      backgroundUpload.value = "";
-
-    });
-
-
-    /* =========================
-       EDITOR VISIBILITY
-    ========================= */
-
-    const toggleEditor =
-      document.querySelector("#toggleEditor");
-
-    const editorToolbar =
-      document.querySelector(".editor-toolbar");
-
-    toggleEditor.addEventListener("click", () => {
-
-      editorToolbar.classList.toggle("hidden");
-
-      if (
-        editorToolbar.classList.contains("hidden")
-      ) {
-
-        toggleEditor.textContent =
-          "MOSTRAR EDITOR";
-
-      } else {
-
-        toggleEditor.textContent =
-          "OCULTAR EDITOR";
+        cursor.style.top =
+          event.clientY + "px";
 
       }
+    );
+
+
+    /* =========================
+       OBJECT HOVER
+    ========================== */
+
+    const objects =
+      document.querySelectorAll(
+        ".scene-object"
+      );
+
+
+    objects.forEach((object) => {
+
+      object.addEventListener(
+        "mouseenter",
+        () => {
+
+          cursorText.textContent =
+            "OPEN";
+
+          cursor.classList.add(
+            "cursor-active"
+          );
+
+        }
+      );
+
+
+      object.addEventListener(
+        "mouseleave",
+        () => {
+
+          cursorText.textContent =
+            "MOVE";
+
+          cursor.classList.remove(
+            "cursor-active"
+          );
+
+        }
+      );
 
     });
+
+
+    /* =========================
+       PROJECT DATA
+    ========================== */
+
+    const projects = {
+
+      usb: [
+        "assets/projects/usb/01.jpg",
+        "assets/projects/usb/02.jpg",
+        "assets/projects/usb/03.jpg"
+      ],
+
+      disco: [
+        "assets/projects/disco/01.jpg",
+        "assets/projects/disco/02.jpg",
+        "assets/projects/disco/03.jpg"
+      ],
+
+      celular: [
+        "assets/projects/celular/01.jpg",
+        "assets/projects/celular/02.jpg",
+        "assets/projects/celular/03.jpg"
+      ],
+
+      "objeto-04": [
+        "assets/projects/objeto-04/01.jpg",
+        "assets/projects/objeto-04/02.jpg",
+        "assets/projects/objeto-04/03.jpg"
+      ]
+
+    };
+
+
+    /* =========================
+       VIEWER
+    ========================== */
+
+    const viewer =
+      document.querySelector("#viewer");
+
+    const viewerTrack =
+      document.querySelector(
+        "#viewerTrack"
+      );
+
+    const viewerFolder =
+      document.querySelector(
+        "#viewerFolder"
+      );
+
+    const viewerCounter =
+      document.querySelector(
+        "#viewerCounter"
+      );
+
+
+    let currentProject = [];
+
+    let currentIndex = 0;
+
+
+    function openViewer(folder) {
+
+      currentProject =
+        projects[folder] || [];
+
+      currentIndex = 0;
+
+
+      viewerFolder.textContent =
+        folder.toUpperCase();
+
+
+      renderViewer();
+
+
+      viewer.classList.add(
+        "viewer-open"
+      );
+
+      viewer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    }
+
+
+    function closeViewer() {
+
+      viewer.classList.remove(
+        "viewer-open"
+      );
+
+      viewer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    function renderViewer() {
+
+      viewerTrack.innerHTML = "";
+
+
+      currentProject.forEach(
+        (image, index) => {
+
+          const item =
+            document.createElement(
+              "div"
+            );
+
+          item.className =
+            "viewer-item";
+
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+          img.src = image;
+
+          img.alt = "";
+
+
+          if (
+            index === currentIndex
+          ) {
+
+            item.classList.add(
+              "active"
+            );
+
+          }
+
+
+          item.appendChild(img);
+
+          viewerTrack.appendChild(
+            item
+          );
+
+        }
+      );
+
+
+      updateViewerPosition();
+
+    }
+
+
+    function updateViewerPosition() {
+
+      const items =
+        viewerTrack.querySelectorAll(
+          ".viewer-item"
+        );
+
+
+      items.forEach(
+        (item, index) => {
+
+          item.style.transform =
+            `translateX(${(index - currentIndex) * 110}%)`;
+
+        }
+      );
+
+
+      viewerCounter.textContent =
+        `${String(currentIndex + 1).padStart(2, "0")} / ${String(currentProject.length).padStart(2, "0")}`;
+
+    }
+
+
+    /* =========================
+       OBJECT CLICK
+    ========================== */
+
+    objects.forEach((object) => {
+
+      object.addEventListener(
+        "click",
+        () => {
+
+          const folder =
+            object.dataset.folder;
+
+          openViewer(folder);
+
+        }
+      );
+
+    });
+
+
+    /* =========================
+       NEXT
+    ========================== */
+
+    document
+      .querySelector("#viewerNext")
+      .addEventListener(
+        "click",
+        () => {
+
+          if (
+            currentIndex <
+            currentProject.length - 1
+          ) {
+
+            currentIndex++;
+
+            updateViewerPosition();
+
+          }
+
+        }
+      );
+
+
+    /* =========================
+       PREVIOUS
+    ========================== */
+
+    document
+      .querySelector("#viewerPrev")
+      .addEventListener(
+        "click",
+        () => {
+
+          if (
+            currentIndex > 0
+          ) {
+
+            currentIndex--;
+
+            updateViewerPosition();
+
+          }
+
+        }
+      );
+
+
+    /* =========================
+       CLOSE
+    ========================== */
+
+    document
+      .querySelector("#viewerClose")
+      .addEventListener(
+        "click",
+        closeViewer
+      );
+
+
+    /* =========================
+       KEYBOARD
+    ========================== */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          !viewer.classList.contains(
+            "viewer-open"
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          document
+            .querySelector(
+              "#viewerNext"
+            )
+            .click();
+
+        }
+
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          document
+            .querySelector(
+              "#viewerPrev"
+            )
+            .click();
+
+        }
+
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeViewer();
+
+        }
+
+      }
+    );
 
   </script>
 
