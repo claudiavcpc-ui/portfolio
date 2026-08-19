@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>PORTFOLIO — Visual Designer</title>
+  <title>VCP_ARCHIVE — Portfolio</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,242 +14,186 @@
 
   <!-- CURSOR -->
   <div class="cursor"></div>
-  <div class="cursor-label">MOVE</div>
 
-  <!-- INTRO -->
-  <main class="portfolio">
+  <!-- EDITOR -->
 
-    <header class="topbar">
-      <div class="system-name">VCP_ARCHIVE</div>
+  <div class="editor">
 
-      <div class="system-info">
-        <span>VISUAL DESIGNER</span>
-        <span>2026</span>
-      </div>
-    </header>
-
-
-    <section class="hero">
-
-      <div class="hero-small">
-        PORTFOLIO / 001
-      </div>
-
-      <h1>
-        CLAUDIA<br>
-        <span>VALERIA</span>
-      </h1>
-
-      <div class="hero-description">
-        Graphic designer / Art direction / Visual experiments
-      </div>
-
-      <div class="scroll-indicator">
-        SCROLL TO EXPLORE ↓
-      </div>
-
-    </section>
-
-
-    <!-- PROJECTS -->
-
-    <section class="projects">
-
-      <div class="section-title">
-        <span>01</span>
-        SELECTED WORK
-      </div>
-
-
-      <div class="project-grid">
-
-
-        <!-- PROJECT 01 -->
-
-        <article class="project" data-project="01">
-
-          <div class="project-folder">
-
-            <div class="folder-tab"></div>
-
-            <div class="folder-body">
-
-              <div class="folder-number">
-                001
-              </div>
-
-              <div class="folder-name">
-                BRANDING
-              </div>
-
-              <div class="folder-arrow">
-                ↗
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="project-meta">
-            <span>BRAND IDENTITY</span>
-            <span>2026</span>
-          </div>
-
-        </article>
-
-
-        <!-- PROJECT 02 -->
-
-        <article class="project" data-project="02">
-
-          <div class="project-folder">
-
-            <div class="folder-tab"></div>
-
-            <div class="folder-body">
-
-              <div class="folder-number">
-                002
-              </div>
-
-              <div class="folder-name">
-                ART DIRECTION
-              </div>
-
-              <div class="folder-arrow">
-                ↗
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="project-meta">
-            <span>CAMPAIGNS / EDITORIAL</span>
-            <span>2026</span>
-          </div>
-
-        </article>
-
-
-        <!-- PROJECT 03 -->
-
-        <article class="project" data-project="03">
-
-          <div class="project-folder">
-
-            <div class="folder-tab"></div>
-
-            <div class="folder-body">
-
-              <div class="folder-number">
-                003
-              </div>
-
-              <div class="folder-name">
-                EXPERIMENTAL
-              </div>
-
-              <div class="folder-arrow">
-                ↗
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="project-meta">
-            <span>DIGITAL / AI / IMAGE</span>
-            <span>2026</span>
-          </div>
-
-        </article>
-
-
-        <!-- PROJECT 04 -->
-
-        <article class="project" data-project="04">
-
-          <div class="project-folder">
-
-            <div class="folder-tab"></div>
-
-            <div class="folder-body">
-
-              <div class="folder-number">
-                004
-              </div>
-
-              <div class="folder-name">
-                SOCIAL MEDIA
-              </div>
-
-              <div class="folder-arrow">
-                ↗
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="project-meta">
-            <span>CONTENT / DIGITAL</span>
-            <span>2025—26</span>
-          </div>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section class="about">
-
-      <div class="section-title">
-        <span>02</span>
-        ABOUT
-      </div>
-
-      <div class="about-content">
-
-        <h2>
-          I BUILD<br>
-          <span>VISUAL WORLDS.</span>
-        </h2>
-
-        <p>
-          Graphic designer focused on visual identity,
-          art direction, digital experiences and experimental
-          image-making.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
-
-    <footer class="footer">
-
+    <div class="editor-header">
       <div>
-        VCP_ARCHIVE © 2026
+        VCP_ARCHIVE
       </div>
 
       <div>
-        CONTACT / INSTAGRAM / LINKEDIN
+        SCENE EDITOR / 001
+      </div>
+    </div>
+
+
+    <div class="editor-toolbar">
+
+      <label class="upload-button">
+        + SUBIR FONDO
+        <input
+          type="file"
+          id="backgroundUpload"
+          accept="image/*"
+          hidden
+        >
+      </label>
+
+      <button id="clearBackground">
+        LIMPIAR
+      </button>
+
+      <button id="toggleEditor">
+        OCULTAR EDITOR
+      </button>
+
+    </div>
+
+
+    <!-- ESCENA -->
+
+    <main
+      id="scene"
+      class="scene"
+    >
+
+      <div
+        id="emptyScene"
+        class="empty-scene"
+      >
+        <span>NO BACKGROUND</span>
+        <small>UPLOAD IMAGE TO BEGIN</small>
       </div>
 
-    </footer>
+      <img
+        id="backgroundImage"
+        class="background-image"
+        alt=""
+      >
 
-  </main>
+    </main>
+
+  </div>
 
 
-  <script src="script.js"></script>
+  <!-- CURSOR LABEL -->
+
+  <div
+    id="cursorLabel"
+    class="cursor-label"
+  >
+    MOVE
+  </div>
+
+
+  <script>
+
+    /* =========================
+       CURSOR
+    ========================= */
+
+    const cursor = document.querySelector(".cursor");
+    const cursorLabel = document.querySelector("#cursorLabel");
+
+    document.addEventListener("mousemove", (event) => {
+
+      cursor.style.left = event.clientX + "px";
+      cursor.style.top = event.clientY + "px";
+
+      cursorLabel.style.left = event.clientX + "px";
+      cursorLabel.style.top = event.clientY + "px";
+
+    });
+
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    const backgroundUpload =
+      document.querySelector("#backgroundUpload");
+
+    const backgroundImage =
+      document.querySelector("#backgroundImage");
+
+    const emptyScene =
+      document.querySelector("#emptyScene");
+
+    backgroundUpload.addEventListener("change", (event) => {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) return;
+
+      const imageURL =
+        URL.createObjectURL(file);
+
+      backgroundImage.src =
+        imageURL;
+
+      backgroundImage.classList.add("visible");
+
+      emptyScene.classList.add("hidden");
+
+    });
+
+
+    /* =========================
+       CLEAR
+    ========================= */
+
+    const clearBackground =
+      document.querySelector("#clearBackground");
+
+    clearBackground.addEventListener("click", () => {
+
+      backgroundImage.src = "";
+
+      backgroundImage.classList.remove("visible");
+
+      emptyScene.classList.remove("hidden");
+
+      backgroundUpload.value = "";
+
+    });
+
+
+    /* =========================
+       EDITOR VISIBILITY
+    ========================= */
+
+    const toggleEditor =
+      document.querySelector("#toggleEditor");
+
+    const editorToolbar =
+      document.querySelector(".editor-toolbar");
+
+    toggleEditor.addEventListener("click", () => {
+
+      editorToolbar.classList.toggle("hidden");
+
+      if (
+        editorToolbar.classList.contains("hidden")
+      ) {
+
+        toggleEditor.textContent =
+          "MOSTRAR EDITOR";
+
+      } else {
+
+        toggleEditor.textContent =
+          "OCULTAR EDITOR";
+
+      }
+
+    });
+
+  </script>
 
 </body>
 </html>
+```
