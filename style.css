@@ -269,9 +269,9 @@ body {
 ========================= */
 
 .object-four {
-  left: 28%;
-  top: 43%;
-  width: 11%;
+  left: 35%;
+  top: 60%;
+  width: 8%;
 
   transform:
     translate(-50%, -50%)
@@ -285,7 +285,7 @@ body {
 
 .object-phone {
   left: 42.5%;
-  top: 49%;
+  top: 80%;
   width: 7.5%;
 
   transform:
@@ -315,8 +315,8 @@ body {
 
 .object-usb {
   left: 41.5%;
-  top: 61.5%;
-  width: 8.5%;
+  top: 85%;
+  width: 20%;
 
   transform:
     translate(-50%, -50%)
