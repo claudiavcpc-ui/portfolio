@@ -86,14 +86,30 @@ body {
 ========================= */
 
 .scene-background {
+
   z-index: 1;
 
-  height: auto;
+  width: 100%;
+  height: 100%;
 
-  overflow: visible;
+  overflow: hidden;
 
-  display: flex;
-  justify-content: center;
+  pointer-events: none;
+}
+
+
+.scene-background img {
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  user-select: none;
 
   pointer-events: none;
 }
