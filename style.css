@@ -61,6 +61,10 @@ body {
    FONDO + OBJETOS
 ========================= */
 
+/* =========================
+   SCENE WORLD
+========================= */
+
 .scene-background,
 .objects {
   position: absolute;
@@ -69,6 +73,11 @@ body {
   left: 0;
 
   width: 100%;
+}
+
+
+.objects {
+  height: 100%;
 }
 
 
