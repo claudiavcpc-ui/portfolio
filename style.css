@@ -269,12 +269,9 @@ body {
 ========================= */
 
 .object-four {
-
-  left: 35.5%;
-  top: 56.7%;
-
-  width: 175px;
-  height: 190px;
+  left: 28%;
+  top: 43%;
+  width: 11%;
 
   transform:
     translate(-50%, -50%)
@@ -287,12 +284,9 @@ body {
 ========================= */
 
 .object-phone {
-
-  left: 48%;
-  top: 57%;
-
-  width: 105px;
-  height: 105px;
+  left: 42.5%;
+  top: 49%;
+  width: 7.5%;
 
   transform:
     translate(-50%, -50%)
@@ -305,12 +299,9 @@ body {
 ========================= */
 
 .object-disco {
-
-  left: 55%;
-  top: 59.5%;
-
-  width: 95px;
-  height: 95px;
+  left: 49%;
+  top: 38%;
+  width: 10.5%;
 
   transform:
     translate(-50%, -50%)
@@ -323,12 +314,9 @@ body {
 ========================= */
 
 .object-usb {
-
-  left: 48%;
-  top: 69%;
-
-  width: 105px;
-  height: 105px;
+  left: 41.5%;
+  top: 61.5%;
+  width: 8.5%;
 
   transform:
     translate(-50%, -50%)
