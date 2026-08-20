@@ -972,22 +972,6 @@ body {
   filter: brightness(1.04);
 }
 
-.object-usb:hover {
-  transform: translateY(-5px) scale(1.025) rotate(-19deg);
-}
-
-.object-disco:hover {
-  transform: translateY(-5px) scale(1.025) rotate(7deg);
-}
-
-.object-phone:hover {
-  transform: translateY(-5px) scale(1.025) rotate(-38deg);
-}
-
-.object-four:hover {
-  transform: translateY(-5px) scale(1.025) rotate(19deg);
-}
-
 
 /* =====================================================
    MANTENER ROTACIONES EN HOVER
