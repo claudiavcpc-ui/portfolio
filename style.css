@@ -108,9 +108,14 @@ body {
 ========================= */
 
 .objects {
-  z-index: 10;
+  position: absolute;
 
+  inset: 0;
+
+  width: 100%;
   height: 100%;
+
+  z-index: 10;
 
   pointer-events: none;
 }
@@ -119,31 +124,41 @@ body {
 .scene-object {
   position: absolute;
 
-  border: 0;
+  display: block;
 
+  border: 0;
   padding: 0;
+  margin: 0;
 
   background: transparent;
+
+  appearance: none;
 
   cursor: none;
 
   pointer-events: auto;
 
-  appearance: none;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
-
-  transition:
-    transform .45s
-    cubic-bezier(.16, 1, .3, 1);
+  transform-origin: center center;
 
   z-index: 10;
+
+  /*
+    La transición mantiene el movimiento
+    pero sin hacer que el objeto "salte".
+  */
+  transition:
+    transform .35s cubic-bezier(.16, 1, .3, 1),
+    filter .35s ease;
 }
 
 
+/* =========================
+   OBJECT IMAGE
+========================= */
+
 .scene-object img {
+  position: relative;
+
   display: block;
 
   width: 100%;
@@ -154,74 +169,202 @@ body {
   user-select: none;
 
   pointer-events: none;
+
+  /*
+    Integración fotográfica.
+    No exageramos el contraste porque
+    el fondo ya tiene textura.
+  */
+  filter:
+    saturate(.96)
+    contrast(1.02);
+
 }
 
 
 /* =========================
-   OBJECT POSITIONS
+   REALISTIC GROUND SHADOW
 ========================= */
 
+.scene-object::after {
+  content: "";
 
-/* USB */
+  position: absolute;
 
-.object-usb {
-  left: 25%;
-  top: 55%;
+  left: 8%;
+  bottom: 2%;
 
-  width: 130px;
-  height: 130px;
+  width: 84%;
+  height: 18%;
+
+  background: rgba(0, 0, 0, .28);
+
+  border-radius: 50%;
+
+  /*
+    Sombra suave y aplastada contra
+    el cemento.
+  */
+  filter: blur(7px);
+
+  transform:
+    skewX(-18deg)
+    scaleY(.48);
+
+  transform-origin: center center;
+
+  opacity: .75;
+
+  z-index: -1;
+
+  pointer-events: none;
 }
 
 
-/* DISCO */
+/* =========================
+   ADDITIONAL OBJECT SHADOW
+========================= */
 
-.object-disco {
-  left: 55%;
-  top: 65%;
-
-  width: 180px;
-  height: 180px;
+.scene-object img {
+  /*
+    Esta sombra sigue el contorno
+    real del PNG transparente.
+  */
+  filter:
+    drop-shadow(
+      7px 10px 7px rgba(0, 0, 0, .22)
+    )
+    saturate(.96)
+    contrast(1.02);
 }
 
 
-/* CELULAR */
-
-.object-phone {
-  left: 75%;
-  top: 45%;
-
-  width: 150px;
-  height: 250px;
-}
-
-
-/* OBJETO 04 */
+/* =========================
+   CARPETA
+========================= */
 
 .object-four {
-  left: 40%;
-  top: 35%;
 
-  width: 140px;
-  height: 140px;
+  left: 35.5%;
+  top: 56.7%;
+
+  width: 175px;
+  height: 190px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(19deg);
 }
 
 
 /* =========================
-   OBJECT HOVER
+   CELULAR
 ========================= */
 
-.scene-object:hover {
+.object-phone {
+
+  left: 48%;
+  top: 57%;
+
+  width: 105px;
+  height: 105px;
+
   transform:
     translate(-50%, -50%)
-    scale(1.35);
+    rotate(-38deg);
+}
+
+
+/* =========================
+   MP3
+========================= */
+
+.object-disco {
+
+  left: 55%;
+  top: 59.5%;
+
+  width: 95px;
+  height: 95px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(7deg);
+}
+
+
+/* =========================
+   CAMARITA
+========================= */
+
+.object-usb {
+
+  left: 48%;
+  top: 69%;
+
+  width: 105px;
+  height: 105px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-19deg);
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.object-four:hover {
+
+  transform:
+    translate(-50%, -50%)
+    rotate(19deg)
+    scale(1.06);
+
+  filter: brightness(1.03);
 
   z-index: 100;
 }
 
 
-/* =========================
-   UI
-========================= */
+.object-phone:hover {
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-38deg)
+    scale(1.06);
+
+  filter: brightness(1.03);
+
+  z-index: 100;
+}
+
+
+.object-disco:hover {
+
+  transform:
+    translate(-50%, -50%)
+    rotate(7deg)
+    scale(1.06);
+
+  filter: brightness(1.03);
+
+  z-index: 100;
+}
+
+
+.object-usb:hover {
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-19deg)
+    scale(1.06);
+
+  filter: brightness(1.03);
+
+  z-index: 100;
+}
 
 .scene-ui {
   position: fixed;
