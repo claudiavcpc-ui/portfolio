@@ -237,6 +237,7 @@ body {
 
   padding: 18px 22px;
 
+   
   font-size: 9px;
 
   letter-spacing: .08em;
@@ -585,4 +586,257 @@ body {
     right: 10px;
   }
 
+}
+/* =====================================================
+   DIRECCIÓN DE ARTE — COMPOSICIÓN
+===================================================== */
+
+.scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.scene-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scene-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+/* =====================================================
+   OBJECT CONTAINER
+===================================================== */
+
+.objects {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   BASE OBJECT
+===================================================== */
+
+.scene-object {
+  position: absolute;
+
+  display: block;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  cursor: none;
+
+  pointer-events: auto;
+
+  transform-origin: center center;
+
+  isolation: isolate;
+}
+
+
+/* =====================================================
+   IMAGES
+===================================================== */
+
+.scene-object img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  position: relative;
+  z-index: 2;
+
+  /* pequeña integración con la fotografía */
+  filter:
+    contrast(1.02)
+    saturate(0.96);
+}
+
+
+/* =====================================================
+   REALISTIC CONTACT SHADOW
+===================================================== */
+
+.scene-object::after {
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  bottom: -5%;
+
+  width: 84%;
+  height: 20%;
+
+  background: rgba(0, 0, 0, 0.30);
+
+  border-radius: 50%;
+
+  filter: blur(8px);
+
+  transform:
+    skewX(-18deg)
+    scaleY(0.55);
+
+  transform-origin: center center;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  opacity: 0.72;
+}
+
+
+/* =====================================================
+   CAMARITA
+   Posición aproximada de la referencia:
+   zona inferior / centro
+===================================================== */
+
+.object-usb {
+
+  left: 41.5%;
+  top: 61.5%;
+
+  width: 8.5%;
+
+  transform:
+    rotate(-19deg);
+}
+
+
+/* =====================================================
+   MP3
+   Zona superior derecha de los objetos
+===================================================== */
+
+.object-disco {
+
+  left: 49%;
+  top: 38%;
+
+  width: 10.5%;
+
+  transform:
+    rotate(7deg);
+}
+
+
+/* =====================================================
+   CELULAR
+   Centro de la composición
+===================================================== */
+
+.object-phone {
+
+  left: 42.5%;
+  top: 49%;
+
+  width: 7.5%;
+
+  transform:
+    rotate(-38deg);
+}
+
+
+/* =====================================================
+   CARPETA
+   Abajo / izquierda
+===================================================== */
+
+.object-four {
+
+  left: 28%;
+  top: 43%;
+
+  width: 11%;
+
+  transform:
+    rotate(19deg);
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.scene-object {
+  transition:
+    transform 0.35s cubic-bezier(.2,.8,.2,1),
+    filter 0.35s ease;
+}
+
+.scene-object:hover {
+  filter: brightness(1.04);
+}
+
+.object-usb:hover {
+  transform: translateY(-5px) scale(1.025) rotate(-19deg);
+}
+
+.object-disco:hover {
+  transform: translateY(-5px) scale(1.025) rotate(7deg);
+}
+
+.object-phone:hover {
+  transform: translateY(-5px) scale(1.025) rotate(-38deg);
+}
+
+.object-four:hover {
+  transform: translateY(-5px) scale(1.025) rotate(19deg);
+}
+
+
+/* =====================================================
+   MANTENER ROTACIONES EN HOVER
+===================================================== */
+
+.object-usb {
+  --object-rotation: -19deg;
+}
+
+.object-disco {
+  --object-rotation: 7deg;
+}
+
+.object-phone {
+  --object-rotation: -38deg;
+}
+
+.object-four {
+  --object-rotation: 19deg;
 }
